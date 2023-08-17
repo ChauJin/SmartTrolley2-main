@@ -1,62 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>AR Example</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.8/aframe/build/aframe-ar.js"></script>
-  </head>
-  <body>
-    <a-scene embedded arjs="sourceType: webcam;">
-      <!-- Define the first marker -->
-      <a-marker preset="hiro">
-        <a-box position="0 0.5 0" material="color: red;"></a-box>
-      </a-marker>
 
-      <!-- Define the second marker -->
-      <a-marker
-        id="animated-marker"
-        type="pattern"
-        preset="custom"
-        url="marker2.patt"
-        raycaster="objects: .clickable"
-        emitevents="true"
-        cursor="fuse: false; rayOrigin: mouse;"
-        id="markerB"
-      >
-        <a-image
-          src="asset2.png"
-          scale="1 1 1"
-          class="clickable"
-          rotation="-90 0 0"
-          gesture-handler
-        ></a-image>
+<head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script
+        src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+    <script
+        src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+</head>
 
-        <!-- Apply rotation to lay down the text horizontally -->
-        <a-text
-          value="This is the goods you wanna find! Pick up:
-                    SOMERSBY
-                    Apple Cider S Bot
-                    330ML
-                    $18.90
-                    Origin: Malaysia
-                    Expiry Date: 2024-12-31 "
-          rotation="-90 0 0"
-          font="exo2bold"
-          scale="3 3 3"
-        ></a-text>
-      </a-marker>
+<style>
+    a-text {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff6600;
+        text-shadow: 1px 1px #000000;
+    }
+</style>
 
-      <!-- Define the camera -->
-      <a-entity camera></a-entity>
+<body style="margin: 0; overflow: hidden;">
+    <a-scene vr-mode-ui="enabled: false;" loading-screen="enabled: false;"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;" id="scene" embedded gesture-detector>
+
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="marker.patt" raycaster="objects: .clickable"
+            emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerA">
+            <a-image src="asset.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+
+            <!-- Apply rotation to lay down the text horizontally -->
+            <a-text value="Wellcome to PARKNSHOP! Enjoy your shooping!!" rotation="-90 0 0" font="exo2bold"
+                scale="3 3 3"></a-text>
+
+        </a-marker>
+
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="marker2.patt" raycaster="objects: .clickable"
+            emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerB" onclick="handleMarkerBClick()">
+            <a-image src="asset2.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+
+            <!-- Apply rotation to lay down the text horizontally -->
+            <a-text value="This is the goods you wanna find! Pick up:
+                SOMERSBY
+                Apple Cider S Bot
+                330ML
+                $18.90
+                Origin: Malaysia
+                Expiry Date: 2024-12-31 " rotation="-90 0 0" font="exo2bold" scale="3 3 3" class="clickable"
+                onclick="showGoodsDescription()"></a-text>
+
+        </a-marker>
+
+        <a-marker id="animated-marker" type="pattern" preset="custom" url="marker3.patt" raycaster="objects: .clickable"
+            emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerC">
+            <a-image src="asset3.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+
+            <!-- Apply rotation to lay down the text horizontally -->
+            <a-text value="Exit is here!" rotation="-90 0 0" font="exo2bold" scale="3 3 3"></a-text>
+
+        </a-marker>
+
+
+
+        <a-entity camera></a-entity>
     </a-scene>
+    <script>function showGoodsDescription() {
+            alert("SOMERSBY\nApple Cider S Bot\n330ML\n$18.90\nOrigin: Malaysia\nExpiry Date: 2024-12-31");
+            // Add your code to show the goods description here
+        }</script>
+</body>
 
-    <script>
-      // Define the function to handle the click event on the second marker
-      function handleMarkerBClick() {
-        console.log("Marker B clicked!");
-        // Add your code to handle the click event here
-      }
-    </script>
-  </body>
 </html>
