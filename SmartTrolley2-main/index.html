@@ -34,20 +34,21 @@
         </a-marker>
 
         <a-marker id="animated-marker" type="pattern" preset="custom" url="marker2.patt" raycaster="objects: .clickable"
-            emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerB">
-            <a-image src="asset2.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
+    emitevents="true" cursor="fuse: true; rayOrigin: cursor;" id="markerB">
+    <a-image src="asset2.png" scale="1 1 1" class="clickable" rotation="-90 0 0" gesture-handler></a-image>
 
-            <!-- Apply rotation to lay down the text horizontally -->
-            <a-text value="This is the goods you wanna find! Pick up:
+    <!-- Apply rotation to lay down the text horizontally -->
+    <a-text value="This is the goods you wanna find! Pick up:
         SOMERSBY
         Apple Cider S Bot
         330ML
         $18.90
         Origin: Malaysia
         Expiry Date: 2024-12-31 " rotation="-90 0 0" font="exo2bold" scale="3 3 3" class="clickable"
-                onmouseenter="this.setAttribute('color', 'red')" onmouseleave="this.setAttribute('color', 'white')">
-            </a-text>
-        </a-marker>
+        event-set__tap="_event: click; color: red"
+        event-set__untap="_event: click; color: white">
+    </a-text>
+</a-marker>
 
         <a-marker id="animated-marker" type="pattern" preset="custom" url="marker3.patt" raycaster="objects: .clickable"
             emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerC">
